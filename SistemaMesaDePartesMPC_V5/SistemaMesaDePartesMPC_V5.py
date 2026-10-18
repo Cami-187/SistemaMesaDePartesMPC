@@ -47,7 +47,7 @@ def guardar_expedientes():
     except Exception as e:
         print(f"Error al guardar los datos: {e}")
 
- # --- FUNCIONES DE VALIDACIÓN ---
+    # --- FUNCIONES DE VALIDACIÓN ---
 
 def validar_dni(dni):
     """Valida que el DNI tenga exactamente 8 dígitos numéricos."""
@@ -65,3 +65,51 @@ def generar_codigo():
         numero = int(ultimo_codigo.split('-')[1])
         nuevo_numero = numero + 1
         return f"EXP-{nuevo_numero:03d}"
+
+# --- FUNCIONES PRINCIPALES ---
+
+def registrar_expediente():
+    print("\n--- REGISTRO DE NUEVO EXPEDIENTE ---")
+    
+    # Ingreso y validación de DNI
+    dni = input("Ingrese el DNI (8 dígitos): ")
+    if not validar_dni(dni):
+        print("Error: El DNI debe contener exactamente 8 dígitos numéricos.")
+        return # Sale de la función si el DNI no es válido
+
+    # Ingreso de datos obligatorios
+    nombre = input("Ingrese los Nombres y Apellidos completos: ").strip()
+    direccion = input("Ingrese la Dirección actual: ").strip()
+    
+    # Ingreso de datos opcionales
+    referencia = input("Ingrese una Referencia de dirección (Opcional, presione Enter para omitir): ").strip()
+    if referencia == "":
+        referencia = "Sin referencia"
+
+    # Verificación de requisitos TUPA
+    print("¿El expediente cumple con todos los requisitos del TUPA correspondientes al trámite?")
+    tupa_input = input("(Escriba 'SI' para continuar o 'NO' si faltan requisitos): ").strip().upper()
+
+    if tupa_input == "SI":
+        # Generación de código
+        nuevo_codigo = generar_codigo()
+        
+        # Guardar en las listas paralelas
+        codigos.append(nuevo_codigo)
+        dnis.append(dni)
+        nombres.append(nombre)
+        direcciones.append(direccion)
+        referencias.append(referencia)
+        cumple_tupa.append(tupa_input)
+        
+        # Guardar cambios en el archivo
+        guardar_expedientes()
+        
+        print(f"\n¡Registro Exitoso!")
+        print(f"Se ha generado el cargo de recepción. Código único del expediente: {nuevo_codigo}")
+    else:
+        print("\nAtención: El expediente no cuenta con todos los requisitos del TUPA.")
+        print("Según el procedimiento, el ciudadano tiene un plazo (ej. 2 días) para subsanar los documentos faltantes.")
+        print("El expediente NO ha sido ingresado al sistema para su derivación final.")
+
+
