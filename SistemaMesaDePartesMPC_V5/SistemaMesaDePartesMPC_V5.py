@@ -45,6 +45,10 @@ def guardar_expedientes():
                 archivo.write(linea)
         print("Datos guardados en el archivo correctamente.")
     except Exception as e:
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> 09df31d165647615446371bc532ce0899eafbffa
         print(f"Error al guardar los datos: {e}")
 
     # --- FUNCIONES DE VALIDACIÓN ---
@@ -65,6 +69,7 @@ def generar_codigo():
         numero = int(ultimo_codigo.split('-')[1])
         nuevo_numero = numero + 1
         return f"EXP-{nuevo_numero:03d}"
+<<<<<<< HEAD
 
 # --- FUNCIONES PRINCIPALES ---
 
@@ -113,3 +118,8 @@ def registrar_expediente():
         print("El expediente NO ha sido ingresado al sistema para su derivación final.")
 
 
+=======
+=======
+        print(f"Error al guardar los datos: {e}")
+>>>>>>> eb143490ddb71ef6d2a6af3fe17fb19664f49631
+>>>>>>> 09df31d165647615446371bc532ce0899eafbffa
