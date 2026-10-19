@@ -111,3 +111,5 @@ def registrar_expediente():
         print("\nAtención: El expediente no cuenta con todos los requisitos del TUPA.")
         print("Según el procedimiento, el ciudadano tiene un plazo (ej. 2 días) para subsanar los documentos faltantes.")
         print("El expediente NO ha sido ingresado al sistema para su derivación final.")
+
+
